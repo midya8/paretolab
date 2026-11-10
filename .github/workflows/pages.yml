@@ -1,4 +1,4 @@
-name: Deploy AuctionLab
+name: Deploy ParetoLab
 on:
   push:
     branches: [main]

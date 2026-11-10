@@ -1,0 +1,18 @@
+# Sources and prior work
+
+Pareto dominance, weighted-sum support, epsilon constraints, Pareto path labels and expected-cost mixtures are established ideas. This repository contributes a bounded inspectable implementation and evidence format, not those algorithms or a new counterexample.
+
+1. David Bergman, Merve Bodur, Carlos Cardonha, Andre A. Cire. *Network Models for Multiobjective Discrete Optimization* (2018). https://arxiv.org/html/1802.08637 . Primary paper, read November10,2026. Network/DAG models, nondominance and the inability of positive weighted sums to recover unsupported efficient points. This project does not implement the paper's network compression techniques or claim its speedups.
+2. Sofie Demeyer, Jan Goedgebeur, Pieter Audenaert, Mario Pickavet, Piet Demeester. *Speeding up Martins' algorithm for multiple objective shortest path problems*. Author manuscript. https://backoffice.biblio.ugent.be/download/4410352/4410359 . Additive multiobjective path labels and the distinction between weighted-sum-supported and other Pareto paths. The project uses a tiny ordered DAG, not their bidirectional search or full label-setting algorithm.
+3. Diederik M. Roijers, Shimon Whiteson, Frans A. Oliehoek. *Computing Convex Coverage Sets for Faster Multi-objective Coordination*. JAIR52:399–443 (2015). https://www.fransoliehoek.net/docs/Roijers15JAIR.pdf . Linear scalarization, Pareto/convex coverage and stochastic strategies' expected-value mixtures in AI decision problems. This graph is not their multi-agent coordination model; no CMOVE/VELS speed claim is imported.
+4. S. Le Digabel. *Multiobjective Optimization*, MTH8418, Polytechnique Montreal, Winter2020(v2). https://www.gerad.ca/Sebastien.Le.Digabel/MTH8418/10_multiobj.pdf . University lecture notes for dominance, Pareto fronts and weighted-sum blind spots. This repository does not implement BiMADS or continuous derivative-free optimization.
+5. *Multi-Criteria Decision Making*, pymoo0.6.2 documentation. https://pymoo.org/mcdm/ . Official software documentation warns that pseudo-weights on nonconvex fronts need not be optimizer weights. ParetoLab computes true exact support intervals, not pseudo-weights. No runtime dependency or performance comparison with pymoo.
+6. discopt documentation, *Scalarization module*. https://kitchingroup.cheme.cmu.edu/discopt/autoapi/discopt/mo/scalarization/index.html . Official software reference for weighted sums, epsilon constraints, tie handling and incomplete cells. ParetoLab enumerates exact finite thresholds with lexicographic ties; it does not implement AUGMECON2 or use a finite uniform grid as a completeness proof.
+
+Source pages were fetched/read for their relevant claims on November10,2026. A separate DOI for *On Supportedness in Multi-Objective Integer Linear Programming* did not return readable content; no theorem from that source is relied on. To avoid terminology ambiguity, this project explicitly defines positive support versus closed endpoint support in MODEL.md.
+
+## Relation to this portfolio
+
+BellmanLab studies discounted finite-state Bellman/occupancy control, including expected-cost constraints and policy mixtures. MatchLab includes a stable-assignment cost/blocker frontier. ParetoLab instead studies additive deterministic DAG paths, full line-envelope support, unsupported deterministic compromises and a whole-path expectation relaxation. The existence of Pareto frontiers or mixtures alone is not presented as a new portfolio capability.
+
+The three-path `(0,12),(7,7),(12,0)` control is a hand-specified illustration of the classical nonconvex discrete-frontier phenomenon. It is not an original impossibility theorem, empirical prevalence result or route recommendation.

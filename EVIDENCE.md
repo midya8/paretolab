@@ -39,4 +39,4 @@ python tools/check_reference.py
 
 ## Publication gate
 
-Local checks passed. Public source/CI/Pages byte fidelity, deployed behavior and portfolio/profile showcase inspection remain pending. This document is not a public-deployment completion report.
+Local checks passed. Public source/CI/Pages byte fidelity, deployed behavior and portfolio/profile showcase inspection are separate completion gates against the exact published commit. This local-evidence document alone is not a public-deployment completion report.

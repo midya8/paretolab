@@ -66,6 +66,6 @@ See [EVIDENCE.md](EVIDENCE.md) for executed test coverage, scope and reproductio
 
 This is classical finite multiobjective planning, not a new algorithm, learned agent, discounted MDP, routing service, real-world cost estimator or scale benchmark. A whole-path lottery is not a per-step randomized control policy. The tool cannot validate supplied costs or provide safety guarantees. Synthetic controls illustrate mechanisms, not prevalence or measured practical advantage.
 
-Local implementation, independent checks and responsive browser inspection are documented here. Public source, CI, deployment and showcase status must be verified separately against the exact current commit; a source file or a successful local run alone is not a deployment-completion claim.
+Local implementation, independent checks and responsive browser inspection are documented here. Check the deployed pages against the current commit before relying on them; passing tests locally does not prove the deployment is current.
 
 MIT licensed.

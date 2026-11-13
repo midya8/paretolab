@@ -1,14 +1,20 @@
 # ParetoLab
 
-**The compromise a weighted sum misses.** An inspectable finite biobjective AI-planning laboratory with full path enumeration, exact support intervals, every optimizer tie and a separately checked dynamic-program label trace.
+ParetoLab compares paths through a small graph with two supplied costs. It
+finds every nondominated path, the paths a weighted sum can select, and the
+paths selected by a hard cost limit. A separate calculation allows lotteries
+over whole paths subject to an expected cost limit. These choices can differ.
 
-Three synthetic alternatives cost `(0,12)`, `(7,7)` and `(12,0)`. None dominates another. But for the middle path to minimize `t*x + (1-t)*y`, it needs both `t >= 7/12` and `t <= 5/12`. No weight works. Constrain the second cost to at most7 instead and that path wins.
+The browser shows every path, exact weight interval, optimizer tie and
+dynamic-program label. Export the report and replay it with the Python checker.
 
-Allow a random choice of a whole path under an *expected* ceiling and the answer changes: choose the first extreme with probability7/12 and the other with probability5/12 for expected costs `(5,7)`. The first extreme still violates the realized ceiling with probability7/12. Expected feasibility is not a hard-bound guarantee.
+Three synthetic alternatives cost `(0,12)`, `(7,7)` and `(12,0)`. None dominates another. But for the middle path to minimize `t*x + (1-t)*y`, it needs both `t >= 7/12` and `t <= 5/12`. No weight works. Constrain the second cost to at most 7 instead and that path wins.
+
+Allow a random choice of a whole path under an *expected* ceiling and the answer changes: choose the first extreme with probability 7/12 and the other with probability 5/12 for expected costs `(5,7)`. The first extreme still violates the realized ceiling with probability 7/12. Expected feasibility is not a hard-bound guarantee.
 
 ## Run
 
-Python3.10+, no runtime dependencies:
+Python 3.10+, no runtime dependencies:
 
 ```sh
 python -m paretolab demo > certificate.json
@@ -26,7 +32,7 @@ python -m pip install .
 paretolab demo
 ```
 
-## What is inspectable
+## What the report contains
 
 - Every start-to-goal path, edge sequence, two-cost vector and strict dominator.
 - All equal-vector path identities, not one arbitrary representative.
@@ -39,7 +45,7 @@ paretolab demo
 
 ## Model and terminology
 
-2–7 ordered nodes, <=12 forward arcs, two additive nonnegative integer minimization costs0..20, <=64 suffix paths per node. Start0, goal`n-1`. Parallel edges are valid and identify different paths. A disconnected graph is valid and reports no feasible optimum.
+2–7 ordered nodes, <=12 forward arcs, two additive nonnegative integer minimization costs 0..20, <=64 suffix paths per node. Start 0, goal `n-1`. Parallel edges are valid and identify different paths. A disconnected graph is valid and reports no feasible optimum.
 
 Here **positive-weight supported** means optimal for some `0 < t < 1`. **Closed support** separately includes `t=0,1`; a dominated path can be an endpoint minimizer, but never becomes Pareto. Nondominated collinear interior points count as supported even if optimal only at one interior weight. Other literature sometimes uses different supportedness conventions.
 
@@ -56,7 +62,7 @@ python -m pip install scipy==1.15.3
 python tools/check_reference.py
 ```
 
-Chrome and Node22 are needed for the browser test. Set `CHROME_BIN` if Chrome is not on the default path. SciPy is used only by the optional numeric reference, not the producer, independent checker or lab.
+Chrome and Node 22 are needed for the browser test. Set `CHROME_BIN` if Chrome is not on the default path. SciPy is used only by the optional numeric reference, not the producer, independent checker or lab.
 
 The Python checker imports input validation only. It independently enumerates forward paths, sweeps every objective-line intersection and reconstructs label/mixture evidence. The browser replay changes traversal but shares evidence construction. Shared theory, input schema and canonical tie conventions can share mistakes; agreement is not formal verification.
 
@@ -66,6 +72,8 @@ See [EVIDENCE.md](EVIDENCE.md) for executed test coverage, scope and reproductio
 
 This is classical finite multiobjective planning, not a new algorithm, learned agent, discounted MDP, routing service, real-world cost estimator or scale benchmark. A whole-path lottery is not a per-step randomized control policy. The tool cannot validate supplied costs or provide safety guarantees. Synthetic controls illustrate mechanisms, not prevalence or measured practical advantage.
 
-Local implementation, independent checks and responsive browser inspection are documented here. Check the deployed pages against the current commit before relying on them; passing tests locally does not prove the deployment is current.
+[EVIDENCE.md](EVIDENCE.md) records local checks. Source, CI and deployed pages
+need separate checks against the current commit; a local pass alone does not
+show that a deployment is current.
 
 MIT licensed.
